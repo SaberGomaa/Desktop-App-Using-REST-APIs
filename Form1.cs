@@ -25,10 +25,11 @@ namespace Desktop_App_API
 
             var depts = result.Content.ReadAsAsync<List<Department>>().Result;
 
-            foreach(Department dept in depts)
-            {
-                comboBox2.Items.Add(dept.Name);
-            }
+            
+            comboBox2.DataSource= depts;
+            comboBox2.SelectedIndex = 0;
+            comboBox2.DisplayMember = "Name";
+            comboBox2.ValueMember = "DepartmentId";
 
         }
 
@@ -42,13 +43,11 @@ namespace Desktop_App_API
             if (result.IsSuccessStatusCode)
             {
                 var emps = result.Content.ReadAsAsync<List<Employee>>().Result;
-                
-                foreach(var emp in emps)
-                {
-                    comboBox1.Items.Add(emp.Name);
-                    
-                }
-
+               
+                comboBox2.ValueMember = "Id";
+                comboBox1.DisplayMember = "Name";
+                comboBox1.DataSource=emps;
+                comboBox1.SelectedIndex = 0;
             }
         }
 
@@ -79,7 +78,7 @@ namespace Desktop_App_API
                 Name = textBox1.Text,
                 Salary = decimal.Parse(textBox3.Text),
                 Age = int.Parse(textBox2.Text),
-                DepartmentId = int.Parse(comboBox2.ValueMember)
+                DepartmentId = int.Parse(comboBox2.SelectedValue.ToString())
 
             };
 
@@ -92,6 +91,7 @@ namespace Desktop_App_API
             if (result.IsSuccessStatusCode)
             {
                 viewAllEmployees();
+                //viewAllEmployeesComboBox();
             }
             else
             {
@@ -109,9 +109,8 @@ namespace Desktop_App_API
 
             int Id = int.Parse(textBox5.Text);
 
-            var result = client.DeleteAsync($"http://localhost:82/api/employee/{Id}");
+            var result = client.DeleteAsync($"http://localhost:82/api/employee/{textBox5.Text}");
 
-            
 
             viewAllEmployees();
 
