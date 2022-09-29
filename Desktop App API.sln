@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32819.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Desktop App API", "Desktop App API.csproj", "{0F8D5AA7-AEA3-4BA8-B2E5-242C9A384A55}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0F8D5AA7-AEA3-4BA8-B2E5-242C9A384A55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F8D5AA7-AEA3-4BA8-B2E5-242C9A384A55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F8D5AA7-AEA3-4BA8-B2E5-242C9A384A55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F8D5AA7-AEA3-4BA8-B2E5-242C9A384A55}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F4216481-ADA5-4B43-9DB7-F6B74C6D9352}
+	EndGlobalSection
+EndGlobal
