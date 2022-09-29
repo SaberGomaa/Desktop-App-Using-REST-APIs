@@ -4,14 +4,53 @@ namespace Desktop_App_API
 {
     public partial class Form1 : Form
     {
-
+        
         public Form1()
         {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("http://127.0.0.1:82/api/");
+
             InitializeComponent();
             viewAllEmployees();
+            viewAllEmployeesComboBox();
+            viewAllDepartmentsComboBox();
+
         }
 
-        
+        private void viewAllDepartmentsComboBox()
+        {
+            HttpClient Client = new HttpClient();
+
+            var result = Client.GetAsync("http://127.0.0.1:82/api/department").Result;
+
+            var depts = result.Content.ReadAsAsync<List<Department>>().Result;
+
+            foreach(Department dept in depts)
+            {
+                comboBox2.Items.Add(dept.Name);
+            }
+
+        }
+
+        private void viewAllEmployeesComboBox()
+        {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("http://127.0.0.1:82/api/");
+
+            var result = client.GetAsync("employee").Result;
+
+            if (result.IsSuccessStatusCode)
+            {
+                var emps = result.Content.ReadAsAsync<List<Employee>>().Result;
+                
+                foreach(var emp in emps)
+                {
+                    comboBox1.Items.Add(emp.Name);
+                    
+                }
+
+            }
+        }
 
         private void viewAllEmployees()
         {
@@ -40,7 +79,7 @@ namespace Desktop_App_API
                 Name = textBox1.Text,
                 Salary = decimal.Parse(textBox3.Text),
                 Age = int.Parse(textBox2.Text),
-                DepartmentId = int.Parse(textBox4.Text)
+                DepartmentId = int.Parse(comboBox2.ValueMember)
 
             };
 
@@ -61,8 +100,30 @@ namespace Desktop_App_API
             textBox1.Clear();
             textBox2.Clear();
             textBox3.Clear();
-            textBox4.Clear();
 
         }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            HttpClient client = new HttpClient();
+
+            int Id = int.Parse(textBox5.Text);
+
+            var result = client.DeleteAsync($"http://localhost:82/api/employee/{Id}");
+
+            
+
+            viewAllEmployees();
+
+            textBox5.Clear();
+
+        }
+
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            
+        }
+
     }
 }
