@@ -62,6 +62,7 @@ namespace Desktop_App_API
                 var emps = result.Content.ReadAsAsync<List<Employee>>().Result;
 
                 dataGridView1.DataSource = emps;
+                dataGridView1.ReadOnly = true;
             }
             else
             {
@@ -91,7 +92,7 @@ namespace Desktop_App_API
             if (result.IsSuccessStatusCode)
             {
                 viewAllEmployees();
-                //viewAllEmployeesComboBox();
+                viewAllEmployeesComboBox();
             }
             else
             {
@@ -107,14 +108,15 @@ namespace Desktop_App_API
         {
             HttpClient client = new HttpClient();
 
-            int Id = int.Parse(textBox5.Text);
-
             var result = client.DeleteAsync($"http://localhost:82/api/employee/{textBox5.Text}");
 
-
-            viewAllEmployees();
+            if (result.IsCompleted)
+            {
+                viewAllEmployees();
+            }
 
             textBox5.Clear();
+            
 
         }
 
