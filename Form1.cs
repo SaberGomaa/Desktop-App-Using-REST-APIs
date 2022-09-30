@@ -110,7 +110,7 @@ namespace Desktop_App_API
 
             var result = client.DeleteAsync($"http://localhost:82/api/employee/{textBox5.Text}");
 
-            if (result.IsCompleted)
+            if (result.IsCompletedSuccessfully)
             {
                 viewAllEmployees();
             }
